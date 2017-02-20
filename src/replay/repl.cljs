@@ -3,7 +3,8 @@
 
 (nodejs/enable-util-print!)
 
-(def hello "what")
+(defn test-function [nvim]
+  (.command nvim "echo \"The eagle has landed!\""))
 
 (defn -main []
-  (println "what is going on?"))
+  (.command js/plugin "ReplayFunction" #js {:nargs 0} test-function))
