@@ -11,3 +11,8 @@
   (comp (cljs :optimizations :simple)
         (sift :include #{#"replay.js"})
         (target :dir #{"rplugin/node"})))
+
+(require '[crisptrutski.boot-cljs-test :refer [test-cljs]])
+
+(deftask testing []
+  (merge-env! :source-paths #{"test"}))

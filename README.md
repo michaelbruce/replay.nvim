@@ -15,3 +15,6 @@ to reload the plugin fully
     - make changes & boot build to place them in rplugin/node
     - load nvim and :UpdateRemotePlugins
     - quit and relaunch nvim - commands should be accessible
+
+### Wishlist
+    - rewrite nrepl-client.js as cljs
