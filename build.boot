@@ -6,13 +6,9 @@
                   [crisptrutski/boot-cljs-test "0.2.2-SNAPSHOT" :scope "test"]
                   ])
 
-;; (require '[degree9.boot-npm :refer :all])
 (require '[adzerk.boot-cljs :refer [cljs]])
 
 (deftask build []
-  (cljs :optimizations :advanced
-        :compiler-options
-        {:main replay.repl
-         :asset-path "rplugin/node/replay/out"
-         :target :nodejs
-         :output-to "rplugin/node/replay.js"}))
+  (comp (cljs :optimizations :advanced)
+        (sift :include #{#"replay.js"})
+        (target :dir #{"rplugin/node"})))
