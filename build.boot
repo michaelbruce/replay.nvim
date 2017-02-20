@@ -14,5 +14,5 @@
 
 (require '[crisptrutski.boot-cljs-test :refer [test-cljs]])
 
-(deftask testing []
-  (merge-env! :source-paths #{"test"}))
+(deftask spec []
+  (test-cljs :js-env :node))

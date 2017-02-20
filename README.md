@@ -1,4 +1,5 @@
 # replay.nvim
+[![travis-ci](https://travis-ci.org/michaelbruce/replay.nvim.svg?branch=master)](https://travis-ci.org/michaelbruce/replay.nvim)
 
 ### Install steps
 
