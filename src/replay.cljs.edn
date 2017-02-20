@@ -1,3 +1,4 @@
 {:require [replay.repl]
  :init-fns [replay.repl/-main]
- :compiler-options {:target :nodejs}}
+ :compiler-options {:target :nodejs
+                    :hashbang false}}

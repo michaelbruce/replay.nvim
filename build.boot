@@ -8,6 +8,6 @@
 (require '[adzerk.boot-cljs :refer [cljs]])
 
 (deftask build []
-  (comp (cljs :optimizations :advanced)
+  (comp (cljs :optimizations :simple)
         (sift :include #{#"replay.js"})
         (target :dir #{"rplugin/node"})))
