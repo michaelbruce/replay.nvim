@@ -19,3 +19,6 @@ to reload the plugin fully
 
 ### Wishlist
     - rewrite nrepl-client.js as cljs
+
+### Debugging
+NEOVIM_JS_DEBUG=~/nvimdebug.log
