@@ -13,6 +13,7 @@
 
 (deftask build []
   (comp (cljs :optimizations :simple)
+        ;; XXX temporary disabled whilst using npm modules
         ;; (sift :include #{#"(replay.js"})
         (target :dir #{"rplugin/node"})))
 

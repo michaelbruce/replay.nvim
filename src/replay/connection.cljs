@@ -21,7 +21,12 @@
   ;;         "d4:code20:(def boot.user/h 59)2:id7:test-id2:op4:eval7:session7:test-ide", "binary")
 
   (def nrepl-client (js/require "nrepl-client"))
-  (.eval (.connect nrepl-client #js {:port 9999} "(def boot.user/g 77)" (fn [err result] (+ 4 4))))
+  (def client (.connect nrepl-client #js {:port 9999}))
+  (def expr "(def boot.user/g 6)")
+
+  (.eval client expr (fn [err result]
+                  (println expr err)
+                  (.end client)))
 
   (.input nvim ":echo \"beamed\"" args)
   )
