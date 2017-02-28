@@ -16,8 +16,9 @@
       (.toString value 16)))
 
 (defn uuid []
-  ;; cljs regex doesn't have global mode encoded - alternative required
-  (.replace "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx" #"[xy]" replacer))
+  (.toUpperCase
+    (.replace "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
+              (js/RegExp. "[xy]" "g") replacer)))
 
 (def sends-in-progress {})
 
