@@ -15,12 +15,40 @@
                   (-> random-number (bit-and 3) (bit-or 8)))]
       (.toString value 16)))
 
-(defn uuid []
+(defn nrepl-uuid []
   (.toUpperCase
     (.replace "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
               (js/RegExp. "[xy]" "g") replacer)))
 
 (def sends-in-progress {})
 
-(def message-log-printer [response length]
-  "wip")
+(def socket (.connect net #js {:port 9999}))
+
+(defn test-send [socket]
+  (.write socket (.encode bencode #js {:id (nrepl-uuid) :op "eval" :code "(def noway 777)"} "binary")))
+
+(defn custom-send [socket code]
+  (.write socket (.encode bencode #js {:id (nrepl-uuid) :op "eval" :code code} "binary")))
+
+(defn translate-output-to-cljs [response]
+  (into {} (for [[k v] (js->clj response)]
+             [(keyword k)
+              (if (vector? v)
+                (map #(.toString (js->clj %)) v)
+                (.toString (js->clj v)))])))
+
+(def nrepl-responses [])
+
+;; reading what is passed back
+(defn receive-and-close [socket]
+  (.on socket "data"
+       (fn [data]
+         (def nrepl-responses (conj nrepl-responses data))
+         (.destroy socket))))
+
+(defn show-logs []
+  (map #(translate-output-to-cljs (.decode bencode %)) nrepl-responses))
+
+;; .connect
+;; .write
+;; .end
