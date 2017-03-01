@@ -22,7 +22,8 @@
 
 (def sends-in-progress {})
 
-(def socket (.connect net #js {:port 9999}))
+(defn socket []
+  (.connect net #js {:port 9999}))
 
 (defn test-send [socket]
   (.write socket (.encode bencode #js {:id (nrepl-uuid) :op "eval" :code "(def noway 777)"} "binary")))
